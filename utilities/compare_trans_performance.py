@@ -12,6 +12,7 @@ import argparse
 import csv
 import json
 import sys
+import os
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -44,6 +45,9 @@ def compiled_ok(entry: dict | None) -> bool:
     return status_ok and rc_ok
 
 
+def get_theorems_from_set(_set: set[int], res: Dict[int, dict]) -> List[int]:
+    return {idx: res[idx] for idx in _set}
+
 def build_csv_rows(
     idxs: List[int],
     res_a: Dict[int, dict],
@@ -54,6 +58,8 @@ def build_csv_rows(
     rows: List[dict] = []
     solved_a: List[int] = []
     solved_b: List[int] = []
+    unverified_a: List[int] = []
+    unverified_b: List[int] = []
     headers = [
         "problem_index",
         f"{label_a}_status",
@@ -68,8 +74,13 @@ def build_csv_rows(
         b_ok = compiled_ok(entry_b)
         if a_ok:
             solved_a.append(idx)
+        else:
+            unverified_a.append(idx)
+        
         if b_ok:
             solved_b.append(idx)
+        else:
+            unverified_b.append(idx)
         rows.append(
             {
                 "problem_index": idx,
@@ -88,7 +99,15 @@ def build_csv_rows(
         f"{label_b}_only": only_b,
         "overlap": overlap,
     }
-    return rows, summary, headers
+    
+    unverified_overlap = set(unverified_a) & set(unverified_b)
+    unverified_theorems = get_theorems_from_set(unverified_overlap, res_a)
+    
+    
+    verified_theorems = get_theorems_from_set(set(solved_a), res_a)
+    verified_theorems.update(get_theorems_from_set(set(solved_b), res_b))
+    
+    return rows, summary, headers, verified_theorems, unverified_theorems
 
 
 def write_csv(rows: List[dict], headers: List[str], output_path: Path | None) -> None:
@@ -137,7 +156,7 @@ def main() -> None:
 
     print(sorted([e for e in res_b]))
     all_idxs = sorted(set(res_a) | set(res_b))
-    rows, summary, headers = build_csv_rows(
+    rows, summary, headers, verified_theorems, unverified_theorems = build_csv_rows(
         all_idxs, res_a, res_b, args.label_a, args.label_b
     )
     write_csv(rows, headers, args.csv_output)
@@ -149,6 +168,14 @@ def main() -> None:
     print("Summary (problem indices):")
     for key, values in summary.items():
         print(f"  {key}: {len(values)}")
+    
+    with open(os.path.join("../output", "union_verified_theorems.jsonl"), "w") as f:
+        for idx, theorem_info in verified_theorems.items():
+            f.write(json.dumps({"index": idx, **theorem_info}) + "\n")
+    
+    with open(os.path.join("../output", "union_unverified_theorems.jsonl"), "w") as f:
+        for idx, theorem_info in unverified_theorems.items():
+            f.write(json.dumps({"index": idx, **theorem_info}) + "\n")
 
 
 if __name__ == "__main__":
