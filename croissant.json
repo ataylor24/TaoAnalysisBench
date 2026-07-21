@@ -1,0 +1,430 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "sc": "https://schema.org/",
+    "source": "cr:source",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "TaoBenchAnalysis",
+  "description": "TaoBenchAnalysis full release: a Lean 4 theorem-proving benchmark derived from Terence Tao's Analysis I textbook formalization, plus the agentic data-construction pipelines, Lean REPL harness, verification scripts, and visualization tooling that produced it. The release contains 600 paired exercises in two formulations (textbook-flavored using Tao's reconstructed types vs Mathlib-only restated using standard Mathlib v4.26.0 definitions), both versions of the textbook source (annotated with 74 LLM-curated Tags/ companion modules, and the un-annotated original), and the full Python codebase used to construct and verify the dataset.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "version": "1.0.0",
+  "datePublished": "2026-05-07",
+  "license": "https://opensource.org/licenses/MIT",
+  "url": "https://example.invalid/TaoBenchAnalysis",
+  "citeAs": "@misc{taobench_analysis_2026,\n  title  = {TaoBenchAnalysis: A Lean 4 theorem-proving benchmark\n            and toolkit derived from Tao's Analysis I formalization},\n  year   = {2026},\n  howpublished = {Release v1.0.0}\n}",
+  "keywords": [
+    "Lean 4",
+    "theorem proving",
+    "Mathlib",
+    "LLM agents",
+    "Tao Analysis",
+    "automated reasoning",
+    "benchmark",
+    "OpenAI Agents SDK"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "README.md",
+      "name": "README.md",
+      "description": "Top-level README with setup, layout, and usage.",
+      "contentUrl": "README.md",
+      "encodingFormat": "text/markdown",
+      "contentSize": "8239 B",
+      "sha256": "249238768c26132f01a5bee75ff1d3f837651157fa8804c9bd4601dbdca2cbbc"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "LICENSE",
+      "name": "LICENSE",
+      "description": "MIT license.",
+      "contentUrl": "LICENSE",
+      "encodingFormat": "text/plain",
+      "contentSize": "1086 B",
+      "sha256": "006adf11e9ece320271bdbbdc0a692044d2059ae93482fcd6ff93aa4866e658e"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "requirements.txt",
+      "name": "requirements.txt",
+      "description": "Python package requirements.",
+      "contentUrl": "requirements.txt",
+      "encodingFormat": "text/plain",
+      "contentSize": "240 B",
+      "sha256": "75d7f2798d13a93528e87e5aad3bf720fbea86ddfb502c96f87b9393238e335a"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": ".env.template",
+      "name": ".env.template",
+      "description": "Environment-variable template (OPENAI_API_KEY etc).",
+      "contentUrl": ".env.template",
+      "encodingFormat": "text/plain",
+      "contentSize": "1815 B",
+      "sha256": "e7d338d8e1e3aa4b5267dfcbf7374b355045bf8d0eb631b8c5d1d161cca96670"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "data/TaoBenchAnalysis_textbook.jsonl",
+      "name": "TaoBenchAnalysis_textbook.jsonl",
+      "description": "600 textbook-flavored Lean 4 exercises, one per line, using Tao's reconstructed types.",
+      "contentUrl": "data/TaoBenchAnalysis_textbook.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "contentSize": "1580101 B",
+      "sha256": "8d457f0d126a2fde8667d2dabe8d7089ea7379474635b0dd0fd8f55ba3ee62ef"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "data/TaoBenchAnalysis_mathlib.jsonl",
+      "name": "TaoBenchAnalysis_mathlib.jsonl",
+      "description": "600 Mathlib-only restatements of the same exercises.",
+      "contentUrl": "data/TaoBenchAnalysis_mathlib.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "contentSize": "393597 B",
+      "sha256": "dab464d6d6a4b557175bd2fcb602a27e069ad568bc838e04203ae92754392924"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "data/textbook_annotated",
+      "name": "textbook_annotated",
+      "description": "Tao Analysis textbook source PLUS 74 LLM-curated companion modules under Analysis/Tags/ that attach simp/aesop/grind attributes to 1521 of 1865 named declarations.",
+      "encodingFormat": "text/x-lean",
+      "includes": "data/textbook_annotated/**/*.lean"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "data/textbook_original",
+      "name": "textbook_original",
+      "description": "Tao Analysis textbook source (clean baseline; same as textbook_annotated minus Analysis/Tags/).",
+      "encodingFormat": "text/x-lean",
+      "includes": "data/textbook_original/**/*.lean"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "agent",
+      "name": "agent",
+      "description": "Agentic data-construction pipelines using the OpenAI Agents SDK: tagging_workflow.py (LLM-curated lemma tagging), relaxation_workflow.py (relaxed-dataset construction), mathlib_translation_workflow.py (Tao→Mathlib restatement). Plus shared toolchest with REPL pool, jixia goal-state, source lookup.",
+      "encodingFormat": "text/x-python",
+      "includes": "agent/**/*.py"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "verification",
+      "name": "verification",
+      "description": "Inference-result verification harness. Splices model proof attempts into canonical slices and compiles via the REPL pool.",
+      "encodingFormat": "text/x-python",
+      "includes": "verification/*.py"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "visualization",
+      "name": "visualization",
+      "description": "HTML visualization tooling for tagging-run results.",
+      "encodingFormat": "text/x-python",
+      "includes": "visualization/*.py"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "lean_runtime",
+      "name": "lean_runtime",
+      "description": "Bundled Lake project hosting the persistent Mathlib REPL the workflows compile against. Pinned to leanprover/lean4:v4.26.0 + Mathlib v4.26.0 + REPL v4.26.0.",
+      "encodingFormat": "text/plain",
+      "includes": "lean_runtime/*"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "TaoBenchAnalysis_textbook",
+      "name": "TaoBenchAnalysis_textbook",
+      "description": "Records from the textbook-flavored dataset. One per Lean theorem to prove.",
+      "key": {
+        "@id": "data/TaoBenchAnalysis_textbook.jsonl/FQN"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_textbook.jsonl/FQN",
+          "name": "FQN",
+          "description": "Fully-qualified Lean 4 name of the target theorem; row primary key.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_textbook.jsonl"
+            },
+            "extract": {
+              "column": "FQN"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_textbook.jsonl/code",
+          "name": "code",
+          "description": "Self-contained Lean 4 file: imports + namespace scaffolding + helper definitions inlined as sorry-bodied stubs + target theorem ending in := by sorry. Compiles under leanprover/lean4:v4.26.0 + Mathlib v4.26.0.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_textbook.jsonl"
+            },
+            "extract": {
+              "column": "code"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_textbook.jsonl/chapter_name",
+          "name": "chapter_name",
+          "description": "Source-section identifier (e.g. Section_5_5, Appendix_B_1).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_textbook.jsonl"
+            },
+            "extract": {
+              "column": "chapter_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_textbook.jsonl/lean_version",
+          "name": "lean_version",
+          "description": "Lean toolchain version (always leanprover/lean4:v4.26.0).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_textbook.jsonl"
+            },
+            "extract": {
+              "column": "lean_version"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_textbook.jsonl/origin",
+          "name": "origin",
+          "description": "Provenance tag (baseline | retry).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_textbook.jsonl"
+            },
+            "extract": {
+              "column": "origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_textbook.jsonl/source",
+          "name": "source",
+          "description": "Producer of the code field.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_textbook.jsonl"
+            },
+            "extract": {
+              "column": "source"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_textbook.jsonl/textbook_commit",
+          "name": "textbook_commit",
+          "description": "Git commit of the upstream Tao Analysis textbook the entry was extracted from.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_textbook.jsonl"
+            },
+            "extract": {
+              "column": "textbook_commit"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_textbook.jsonl/index",
+          "name": "index",
+          "description": "Original row index within the merged dataset.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_textbook.jsonl"
+            },
+            "extract": {
+              "column": "index"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "TaoBenchAnalysis_mathlib",
+      "name": "TaoBenchAnalysis_mathlib",
+      "description": "Records from the mathlib restatement dataset. One per Lean theorem to prove.",
+      "key": {
+        "@id": "data/TaoBenchAnalysis_mathlib.jsonl/FQN"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_mathlib.jsonl/FQN",
+          "name": "FQN",
+          "description": "Fully-qualified Lean 4 name preserving the Tao theorem name; lives inside the TaoBench namespace in code.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_mathlib.jsonl"
+            },
+            "extract": {
+              "column": "FQN"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_mathlib.jsonl/code",
+          "name": "code",
+          "description": "Self-contained Lean 4 file with import Mathlib + Aesop, opened standard namespaces, and the target theorem restated using only Mathlib types. Body is := by sorry.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_mathlib.jsonl"
+            },
+            "extract": {
+              "column": "code"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_mathlib.jsonl/chapter_name",
+          "name": "chapter_name",
+          "description": "Source-section identifier (mirrors the textbook variant).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_mathlib.jsonl"
+            },
+            "extract": {
+              "column": "chapter_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_mathlib.jsonl/exercise_enumeration",
+          "name": "exercise_enumeration",
+          "description": "Tao Analysis exercise number (e.g. 5.5.4).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_mathlib.jsonl"
+            },
+            "extract": {
+              "column": "exercise_enumeration"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_mathlib.jsonl/lean_version",
+          "name": "lean_version",
+          "description": "Lean toolchain version (always leanprover/lean4:v4.26.0).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_mathlib.jsonl"
+            },
+            "extract": {
+              "column": "lean_version"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_mathlib.jsonl/origin",
+          "name": "origin",
+          "description": "Provenance tag (baseline | retry | retry_with_hint).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_mathlib.jsonl"
+            },
+            "extract": {
+              "column": "origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_mathlib.jsonl/source",
+          "name": "source",
+          "description": "Producer of the code field; always 'mathlib_code' for this release.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_mathlib.jsonl"
+            },
+            "extract": {
+              "column": "source"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "data/TaoBenchAnalysis_mathlib.jsonl/index",
+          "name": "index",
+          "description": "Original row index within the merged dataset.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "data/TaoBenchAnalysis_mathlib.jsonl"
+            },
+            "extract": {
+              "column": "index"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

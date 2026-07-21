@@ -1,0 +1,29 @@
+name = "repl_v4_26_0"
+version = "0.1.0"
+defaultTargets = ["ReplV4_26_0"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.26.0"
+
+[[require]]
+name = "repl"
+git = "https://github.com/leanprover-community/repl"
+rev = "v4.26.0"
+
+# Tao Analysis textbook + LLM-curated Tags companion modules. Bundled at
+# ../analysis/analysis so the relaxed dataset entries (which start with
+# `import Analysis.Section_X_Y` + `import Analysis.Tags.Section_X_Y`)
+# resolve from the REPL.
+[[require]]
+name = "Analysis"
+path = "../analysis/analysis"
+
+[[lean_lib]]
+name = "ReplV4_26_0"

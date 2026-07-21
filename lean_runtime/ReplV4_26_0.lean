@@ -1,0 +1,2 @@
+-- Stub library so lake has a target. The REPL is invoked via `lake exe repl`,
+-- which is provided by the REPL dependency.

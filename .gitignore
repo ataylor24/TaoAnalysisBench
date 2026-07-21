@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Lean / Lake
+.lake/
+lake-manifest.json
+*.olean
+*.ilean
+*.hash
+*.c
+
+# Editor
+.idea/
+.vscode/
+.DS_Store
+
+# Local outputs
+output/
+.cache/
+*.log

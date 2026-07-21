@@ -1,0 +1,15 @@
+name = "Analysis"
+version = "0.1.0"
+defaultTargets = ["Analysis"]
+
+[leanOptions]
+pp.unicode.fun = true
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.26.0"
+
+[[lean_lib]]
+name = "Analysis"
+moreLeanArgs = ["-Dwarn.sorry=false"]

@@ -1,0 +1,9 @@
+# Core agent runtime
+openai-agents>=0.0.10
+python-dotenv>=1.0.0
+
+# Optional: weave/wandb tracing of agent runs.
+# Uncomment to enable; the workflows have `# import weave` placeholders to
+# uncomment as well.
+# weave>=0.51.0
+# wandb>=0.18.0
